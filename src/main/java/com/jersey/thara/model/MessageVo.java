@@ -14,6 +14,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class MessageVo {
 	
 	private int id;
+	private String name;
+	private String email;
+	private String phoneNumber;
 	private String message;
 	private Date created;
 	private String author;
@@ -34,6 +37,30 @@ public class MessageVo {
 		this.links = link;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	@XmlTransient
 	public Map<Integer, Comments> getCommentMap() {
 		return commentMap;
@@ -43,12 +70,16 @@ public class MessageVo {
 		this.commentMap = commentMap;
 	}
 
-	public MessageVo(int id, String message, String author) {
+	
+
+	public MessageVo(int id, String name, String email, String phoneNumber, String message, String author) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
 		this.message = message;
 		this.author = author;
-		this.created = new Date();
 	}
 
 	public int getId() {

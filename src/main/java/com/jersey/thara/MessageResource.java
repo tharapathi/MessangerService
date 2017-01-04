@@ -80,6 +80,32 @@ public class MessageResource {
 		return  messageService.addMessage(message);
 		
 	}
+	
+	@POST
+	@Path("/addUser/{id}/{name}/{email}/{phoneNumber}/{author}/{message}")
+	public MessageVo addMessageUsingUI(@PathParam("id") int id,
+			@PathParam("name") String name,
+			@PathParam("email") String email,
+			@PathParam("phoneNumber") String phoneNumber,
+			@PathParam("author") String author,
+			@PathParam("message") String messageText){
+		
+		MessageVo message = new MessageVo(id, name, email, phoneNumber, messageText, author);
+		return  messageService.addMessage(message);
+		
+	}
+	@PUT
+	@Path("/edit/{id}/{name}/{email}/{phoneNumber}/{author}/{message}")
+	public MessageVo updateMessageUsingUI(@PathParam("id") int id,
+			@PathParam("name") String name,
+			@PathParam("email") String email,
+			@PathParam("phoneNumber") String phoneNumber,
+			@PathParam("author") String author,
+			@PathParam("message") String messageText){
+		MessageVo message = new MessageVo(id, name, email, phoneNumber, messageText, author);
+		return  messageService.updateMessage(message);
+		
+	}
 	@PUT
 	@Path("/{id}")
 	public MessageVo updateMessageType(@PathParam("id") int id, MessageVo message ){
@@ -88,7 +114,7 @@ public class MessageResource {
 	}
 	@DELETE
 	@Path("/{messageId}")
-	public MessageVo updateMessageType(@PathParam("id") int id){
+	public MessageVo updateMessageType(@PathParam("messageId") int id){
 		return  messageService.removeMessage(id);
 	}
 	
