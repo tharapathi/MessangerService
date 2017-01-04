@@ -24,11 +24,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/tredd4/Downloads/servlet-api-3.0.jar.zip"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+	<classpathentry kind="lib" path="C:/Users/tredd4/Downloads/restfuljersey/restfuljersey/WebContent/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/tredd4/Downloads/restfuljersey/restfuljersey/WebContent/WEB-INF/lib/jaxb-api-2.2.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
