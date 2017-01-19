@@ -36,6 +36,7 @@ public class MessageResource {
 		return  messageService.getMessages();
 		
 	}
+	
 	@GET
 	@Path("/{id}")
 	public MessageVo getMessageById(@PathParam("id") int id, @Context UriInfo uriInfo){
@@ -76,8 +77,35 @@ public class MessageResource {
 		  	return uri;
 	}
 	@POST
+	
 	public MessageVo getMessageType(MessageVo message ){
 		return  messageService.addMessage(message);
+		
+	}
+	
+	@POST
+	@Path("addUser/{name}/{author}/{message}/{email}/{phoneNumber}")/*name,email,phoneNumber*/
+	public MessageVo addMessageVo(@PathParam("name") String name,
+			@PathParam("author") String author,
+			@PathParam("message") String strMessage,
+			@PathParam("email") String email,
+			@PathParam("phoneNumber") String phoneNumber
+			){
+		MessageVo message = new 	MessageVo(0,name, strMessage, author, email, phoneNumber);
+		return  messageService.addMessage(message);
+
+	}
+	
+	@PUT
+	@Path("edit/{id}/{name}/{author}/{message}/{email}/{phoneNumber}")
+	public MessageVo updateMessageType(@PathParam("id") int id, @PathParam("name") String name,
+			@PathParam("author") String author,
+			@PathParam("message") String strMessage,
+			@PathParam("email") String email,
+			@PathParam("phoneNumber") String phoneNumber
+			){
+		MessageVo message = new 	MessageVo(id,name, strMessage, author, email, phoneNumber);
+		return  messageService.updateMessage(message);
 		
 	}
 	@PUT

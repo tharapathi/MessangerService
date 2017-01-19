@@ -17,10 +17,10 @@ public class MessageDatabase {
 	
 	public static Map<Integer, MessageVo> getMessageData(){
 		
-		MessageVo  message1 = new MessageVo(1, "Thara", "rodJonson");
-		MessageVo  message2 = new MessageVo(2, "hema", "RVR");
-		MessageVo  message3 = new MessageVo(3, "Jhan", "NGR");
-		MessageVo  message4 = new MessageVo(4, "srav", "vani");
+		MessageVo  message1 = new MessageVo(1, "tharapathi","Thara", "rodJonson", "thara@gmail.com", "7405207197");
+		MessageVo  message2 = new MessageVo(2,"tharapathi1", "hema", "RVR", "thara1@gmail.com", "7405207192");
+		MessageVo  message3 = new MessageVo(3,"tharapathi2", "Jhan", "NGR", "thara2@gmail.com", "7405207193");
+		MessageVo  message4 = new MessageVo(4, "tharapathi3","srav", "vani", "thara3@gmail.com", "7405207194");
 		messageMap.put(1, message1);
 		messageMap.put(2, message2);
 		messageMap.put(3, message3);

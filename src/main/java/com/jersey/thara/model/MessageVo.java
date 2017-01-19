@@ -14,13 +14,17 @@ import javax.xml.bind.annotation.XmlTransient;
 public class MessageVo {
 	
 	private int id;
+	private String name;
 	private String message;
 	private Date created;
 	private String author;
+	private String email;
+	private String phoneNumber; 
 	
 	private Map<Integer, Comments> commentMap = new HashMap<Integer, Comments>();
 	
 	public List<Link> links = new ArrayList<Link>();
+	
 	
 	
 	public MessageVo() {
@@ -28,6 +32,22 @@ public class MessageVo {
 	
 	public List<Link> getLink() {
 		return links;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setLink(List<Link> link) {
@@ -43,12 +63,15 @@ public class MessageVo {
 		this.commentMap = commentMap;
 	}
 
-	public MessageVo(int id, String message, String author) {
+
+	public MessageVo(int id, String name, String message, String author, String email, String phoneNumber) {
 		super();
 		this.id = id;
+		this.name = name;
 		this.message = message;
 		this.author = author;
-		this.created = new Date();
+		this.email = email;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public int getId() {
@@ -83,6 +106,14 @@ public class MessageVo {
 		link.setRel(rel);
 		
 		links.add(link);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
