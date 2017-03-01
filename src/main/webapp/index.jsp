@@ -44,7 +44,7 @@ td, th {
     </form>
     
     <table id = "dynamic">
-    	<thead>
+    	<thead bgcolor="#999966">
     	<tr>
     		<th>SNO</th>
     		<th>Name</th>
@@ -56,7 +56,7 @@ td, th {
     	</thead>
     	
     	<tbody>
-    		<tr>
+    		<tr bgcolor="green">
     			<td id = "Id"></td>
     			<td id = "name"></td>
     			<td id ="author"></td>
@@ -81,8 +81,8 @@ td, th {
 function remove(event) {
 	var id = $(event.parentElement.parentElement).find('#id').text();
 	$.ajax({
-	//	url : "http://localhost:8080/MessangerBook/restapi/messages/"+id,
-		url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/"+id,
+		url : "http://localhost:8080/MessangerBook/restapi/messages/"+id,
+		//	url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/"+id,
 		type: 'DELETE',
 		success : function(data) {
 			location.reload();
@@ -93,8 +93,8 @@ function remove(event) {
 function populate(event) {
 	var id = $(event.parentElement.parentElement).find('#id').text();
 	$.ajax({
-		//url : "http://localhost:8080/MessangerBook/restapi/messages/"+id,
-		url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/"+id,
+		url : "http://localhost:8080/MessangerBook/restapi/messages/"+id,
+		//	url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/"+id,
 		success : function(data) {
 			$('#id').val(data.id);
 			$('#name').val(data.name);
@@ -110,22 +110,62 @@ $(document).ready(function(){
 	
 	$("#add").click(function() {
 		var query = "/"+$('#name').val()+"/"+$('#author').val()+"/"+$('#message').val()+"/"+$("#email").val()+"/"+$("#phoneNumber").val();
-		alert(query);
-		$.ajax({
-			//url : "http://localhost:8080/MessangerBook/restapi/messages/addUser"+query,
-			url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/addUser"+query,
+		var w3r = {};
+		
+        w3r.name = $('#name').val();
+        w3r.author = $('#author').val();
+        w3r.message = $('#message').val();
+        w3r.email = $('#email').val();
+        w3r.phoneNumber = $('#phoneNumber').val();
+        var w3r_JSON = JSON.stringify(w3r); // w3r_JSON holds {"PHP":"w3resource PHP tutorial","Examples":500}
+        console.log(w3r_JSON);
+		/* var testData : [{
+			"name" : $('#name').val(),
+			"author" : $('#author').val(),
+			"message" : $('#message').val(),
+			"email" : $("#email").val(),
+			"phoneNumber" : $("#phoneNumber").val()
+		}]; */
+		alert(w3r_JSON);
+		  $.ajax({
+			url : "http://localhost:8080/MessangerBook/restapi/messages/addUser"+query,
+			//	url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/addUser"+query,
 			type : "POST",
 			success : function(data) {
 				location.reload();
 			}
-		});
+		}); 
+		  /* 
+		  $.ajax({
+			type: 'POST',
+			dataType: 'json',
+			contentType:'application/json',
+			data: {
+				"name" : $('#name').val(),
+				"author" : $('#author').val(),
+				"message" : $('#message').val(),
+				"email" : $("#email").val(),
+				"phoneNumber" : $("#phoneNumber").val()
+			},
+			//url: "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/addUser"+data,
+			url : "http://localhost:8080/MessangerBook/restapi/messages/addUser/test/"+w3r,
+			success: function(w3r_JSON ){
+				location.reload();
+			console.log(w3r_JSON);
+			alert("success");
+			
+			},
+			error: function(xhr, textStatus, errorThrown){
+			//alert('request failed'+errorThrown);
+			}
+			});*/ 
 	});
 	
 	$("#update").click(function() {
 		var query = $("#id").val()+"/"+$('#name').val()+"/"+$('#author').val()+"/"+$('#message').val()+"/"+$("#email").val()+"/"+$("#phoneNumber").val();
 		$.ajax({
-			//url : "http://localhost:8080/MessangerBook/restapi/messages/edit/"+query,
-			url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/edit/"+query,
+			url : "http://localhost:8080/MessangerBook/restapi/messages/edit/"+query,
+			//url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages/edit/"+query,
 			type : "PUT",
 			success : function(data) {
 				location.reload();
@@ -135,8 +175,8 @@ $(document).ready(function(){
 	
 	$('#dynamic tbody tr:first-child').hide();
 	$.ajax({
-		// url : "http://localhost:8080/MessangerBook/restapi/messages",
-		url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages",
+		 url : "http://localhost:8080/MessangerBook/restapi/messages",
+		//url : "http://messangerbook.azurewebsites.net/MessangerBook/restapi/messages",
 		success: function(data) {
 			$('#dynamic tbody tr:not(:first-child)').remove();
 			$.each(data, function(index, row) {

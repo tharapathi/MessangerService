@@ -1,5 +1,9 @@
 package com.jersey.thara;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import javax.ws.rs.BeanParam;
@@ -15,6 +19,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jersey.thara.model.MessageVo;
 import com.jersey.thara.service.MessageService;
 
@@ -95,6 +110,66 @@ public class MessageResource {
 		return  messageService.addMessage(message);
 
 	}
+	@POST
+	@Path("addUser/test/{data}")/*name,email,phoneNumber*/
+	public MessageVo addMessageVoJson(@PathParam("data") String data
+			) throws ParseException{
+		MessageVo ronaldo = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			
+			JSONParser parser = new JSONParser(); 
+			ronaldo = mapper.readValue(new File("data.json"), MessageVo.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		String jsonInString = data;
+
+//		MessageVo message1 = new 	MessageVo(0,message.get, strMessage, author, email, phoneNumber);
+		return  messageService.addMessage(ronaldo);
+
+	}
+	public static void toJava() { // this is the key object to convert JSON to Java 
+		ObjectMapper mapper = new ObjectMapper(); 
+		try {
+			File json = new File("MessageVo.json"); 
+			MessageVo cricketer = mapper.readValue(json, MessageVo.class);
+			System.out.println("Java object created from JSON String :");
+			System.out.println(cricketer); 
+			} catch (JsonGenerationException ex) {
+				ex.printStackTrace(); 
+				} catch (JsonMappingException ex) {
+					ex.printStackTrace(); 
+					} catch (IOException ex) {
+						ex.printStackTrace(); 
+						}
+		}
+	/** * Java method to convert Java Object into JSON String with help of Jackson API. * *//* 
+	public static void toJSON() {
+		MessageVo kevin = new MessageVo(0,"thara","tt","rr","rrr","fa"); // our bridge from Java to JSON and vice versa 
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			File json = new File("MessageVo.json");
+			mapper.writeValue(json, kevin);
+			System.out.println("Java object converted to JSON String, written to file");
+			System.out.println(mapper.writeValueAsString(kevin));
+			} catch (JsonGenerationException ex) {
+				ex.printStackTrace();
+				} catch (JsonMappingException ex) {
+					ex.printStackTrace();
+					} catch (IOException ex) { 
+						ex.printStackTrace();
+						}
+		}
+	}*/
+
 	
 	@PUT
 	@Path("edit/{id}/{name}/{author}/{message}/{email}/{phoneNumber}")
